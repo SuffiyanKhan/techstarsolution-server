@@ -28,20 +28,20 @@ const signupcontroller = async (req, res) => {
 
         // Generate JWT token
         const token = jwt.sign(
-            { 
-                name: signupData.name, 
-                email: signupData.email, 
-                phone: signupData.phone 
+            {
+                name: signupData.name,
+                email: signupData.email,
+                phone: signupData.phone
             },
-            process.env.JWT_SECRET || "your-secret-key", 
-            { expiresIn: "7d" }  
+            process.env.JWT_SECRET || "your-secret-key",
+            { expiresIn: "7d" }
         );
-        return res.status(201).json({
-            status: 201,
+        return res.status(200).json({
+            status: 200,
             success: true,
             message: "Signup successful!",
-            token , 
-            id:response._id
+            token,
+            id: response._id
         });
 
     } catch (error) {
@@ -55,4 +55,59 @@ const signupcontroller = async (req, res) => {
     }
 };
 
-export { signupcontroller };
+const logincontroller = async (req, res) => {
+    try {
+        const { loginData } = req.body;
+        const userExist = await findByEmailService(loginData.email);
+        if (!userExist) {
+            return res.status(404).json({
+                status: 404,
+                success: false,
+                message: "Invalid credentials, please try again"
+            });
+        }
+
+        const comparePass = await bcrypt.compare(loginData.password, userExist.password);
+        if (!comparePass) {
+            return res.status(401).json({
+                status: 401,
+                success: false,
+                message: "Invalid credentials, please try again"
+            });
+        }
+
+        const token = jwt.sign(
+            {
+                name: userExist.name,
+                email: userExist.email,
+                phone: userExist.phone,
+            },
+            process.env.JWT_SECRET || "your-secret-key",
+            { expiresIn: "7d" }
+        );
+
+        return res.status(200).json({
+            status: 200,
+            success: true,
+            message: "Login successful!",
+            token,
+            data: userExist,
+            id: userExist._id
+        });
+
+    } catch (error) {
+        console.error("Login Error:", error);
+        return res.status(500).json({
+            status: 500,
+            success: false,
+            message: "Internal server error",
+            error: error.message
+        });
+    }
+};
+
+
+export {
+    signupcontroller,
+    logincontroller
+};
