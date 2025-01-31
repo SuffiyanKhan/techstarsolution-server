@@ -3,11 +3,6 @@ import { signupcontroller } from '../controllers/auth.controllers.js';
 
 const authRouting = express.Router();
 
-// authRouting('signup',signupcontroller)
-// authRouting('login')
-
-
-
-
+authRouting.post('/signupapi', signupcontroller);  // Correct way
 
 export default authRouting;
