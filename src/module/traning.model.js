@@ -34,7 +34,7 @@ const trainingSchema = new Schema({
   },
   trainingName:{
     type: String,
-    // required: true 
+    required: true 
   },
   price:{
     type: String,
@@ -42,6 +42,14 @@ const trainingSchema = new Schema({
   },
   payment:{
     type: Boolean,
+    default:false
+  },
+  access:{
+    type:Boolean,
+    default:false
+  },
+  denied:{
+    type:Boolean,
     default:false
   }
 },{timestamps:true});

@@ -10,6 +10,16 @@ try {
 }
 }
 
+const getAllDataServices=async()=>{
+    try {
+        const response = await Contact.find({}).exec();
+        return response
+    } catch (error) {
+        throw error;
+    }
+}
+
 export{
-    saveContactFormDataService
+    saveContactFormDataService,
+    getAllDataServices
 }

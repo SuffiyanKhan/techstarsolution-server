@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { findByEmailService, signupService } from "../services/auth.services.js";
+import { deleteUserServices, findByEmailService, getAllUsersDataServices, signupService } from "../services/auth.services.js";
 import jwt from 'jsonwebtoken';
 
 const signupcontroller = async (req, res) => {
@@ -106,8 +106,37 @@ const logincontroller = async (req, res) => {
     }
 };
 
+const getAllUsers = async (req, res) => {
+    try {
+        const response = await getAllUsersDataServices();
+        return res.status(200).json({ status: 200, success: true, message: "success", data: response })
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            success: false,
+            message: "Internal server error",
+            error: error.message
+        });
+    }
+}
+
+const deleteUserController = async (req, res) => {
+    try {
+        const id = req.params.id;
+        console.log(req.params.id)
+        const response = await deleteUserServices(id);
+        if (!response) {
+            return res.status(404).json({ status: 404, success: false, message: 'User not found' });
+        }
+        return res.status(200).json({ status: 200, success: true, message: 'User deleted successfully' });
+    } catch (error) {
+        return res.status(500).json({ status: 500, sucess: false, message: "internal server error", error: error.message })
+    }
+}
 
 export {
     signupcontroller,
-    logincontroller
+    logincontroller,
+    getAllUsers,
+    deleteUserController
 };

@@ -1,4 +1,4 @@
-import { saveContactFormDataService } from "../services/contact.services.js";
+import { getAllDataServices, saveContactFormDataService } from "../services/contact.services.js";
 
 const contacUsDataSaveController = async (req, res) => {
     try {
@@ -11,6 +11,16 @@ const contacUsDataSaveController = async (req, res) => {
     }
 }
 
+const getAllDataController=async(req,res)=>{
+    try {
+        const response = await getAllDataServices();
+        return res.status(200).json({ status: 200, sucess: true, message: "sucess", data: response })
+    } catch (error) {
+        return res.status(500).json({status:500,sucess:false,message:"internal server error",error:error.message})
+    }
+}
+
 export{
-    contacUsDataSaveController
+    contacUsDataSaveController,
+    getAllDataController
 }
