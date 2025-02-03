@@ -2,8 +2,8 @@ import { accessDeniedTrainingVideosServices, accessTrainingVideosServices, getTr
 
 const traningDataSaveController = async (req, res) => {
     try {
-        const { name, email, address, country, city, zip, phone, traningname, price } = req.body;
-        const obj={name, email, address, country, city, zip, phone, traningname, price};
+        const { name, email, address, country, city, zip, phone, trainingName, price } = req.body;
+        const obj={name, email, address, country, city, zip, phone, trainingName, price};
         const response = await saveTraningDataService(obj);
         return res.status(200).json({ status: 200, success: true, message: "success" })
     } catch (error) {
