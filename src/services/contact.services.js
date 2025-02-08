@@ -19,7 +19,17 @@ const getAllDataServices=async()=>{
     }
 }
 
+const deleteDataServices=async(_id)=>{
+    try {
+        const response = await Contact.findByIdAndDelete({_id}).exec();
+        return response ;
+    } catch (error) {
+        throw error;
+    }
+}
+
 export{
     saveContactFormDataService,
-    getAllDataServices
+    getAllDataServices,
+    deleteDataServices
 }

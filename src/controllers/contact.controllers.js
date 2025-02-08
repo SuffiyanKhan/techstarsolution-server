@@ -1,4 +1,4 @@
-import { getAllDataServices, saveContactFormDataService } from "../services/contact.services.js";
+import { deleteDataServices, getAllDataServices, saveContactFormDataService } from "../services/contact.services.js";
 
 const contacUsDataSaveController = async (req, res) => {
     try {
@@ -11,16 +11,27 @@ const contacUsDataSaveController = async (req, res) => {
     }
 }
 
-const getAllDataController=async(req,res)=>{
+const getAllDataController = async (req, res) => {
     try {
         const response = await getAllDataServices();
         return res.status(200).json({ status: 200, sucess: true, message: "sucess", data: response })
     } catch (error) {
-        return res.status(500).json({status:500,sucess:false,message:"internal server error",error:error.message})
+        return res.status(500).json({ status: 500, sucess: false, message: "internal server error", error: error.message })
     }
 }
 
-export{
+const deleteContactForm = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const response = await deleteDataServices(id);
+        return res.status(200).json({ status: 200, success: true, message: "success", })
+    } catch (error) {
+        return res.status(500).json({ status: 500, success: false, message: "internal server error", error: error.message })
+    }
+}
+
+export {
     contacUsDataSaveController,
-    getAllDataController
+    getAllDataController,
+    deleteContactForm
 }
