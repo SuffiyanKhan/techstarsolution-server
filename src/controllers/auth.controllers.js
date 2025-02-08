@@ -41,7 +41,8 @@ const signupcontroller = async (req, res) => {
             success: true,
             message: "Signup successful!",
             token,
-            id: response._id
+            id: response._id,
+            data: response
         });
 
     } catch (error) {

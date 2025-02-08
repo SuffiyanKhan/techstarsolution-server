@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import serverconfig from './src/config/config.js';
+import http from 'http';
+import { Server } from 'socket.io';
 import { DB_RETRY_LIMIT, DB_RETRY_TIMEOUT } from './src/constant/constant.js';
 import authRouting from './src/routing/auth.routing.js';
 import billingRouting from './src/routing/billing.routing.js';
@@ -9,7 +10,14 @@ import traningRouting from './src/routing/traning.routing.js';
 import contactRouting from './src/routing/contact.routing.js';
 const app = express();
 const PORT = process.env.PORT || 9000;
-
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: ['http://localhost:5173', 'http://localhost:5174'], // React app ka URL
+        methods: ['GET', 'POST', 'DELETE'],
+        allowedHeaders: ['Content-Type'],
+    }
+});
 app.use(cors());
 app.use(express.json());
 let connnectionRetries = 0;
@@ -33,12 +41,37 @@ const connectionDB = async () => {
 connectionDB()
     .then(res => console.log("DB connected"))
     .catch(err => console.log("DB NOT Connected"));
-app.get('/',(req,res)=>{res.status(200).json({status:200,message:"sucessfully run api"})})
+
+
+
+// io.on('connection', (socket) => {
+//     console.log('✅ User connected:', socket.id);
+
+//     socket.on('contact us', ({name,email,subject,phone,content,companyname}) => {
+//         console.log(`🎟️ New Lead From Contact: ${contactData}`);
+//         io.emit('contact us', ({name,email,subject,phone,content,companyname}))
+//     })
+
+// });
+io.on('connection', (socket) => {
+    console.log('✅ User connected:', socket.id);
+
+    socket.on('contact us', (contactData) => {  // ✅ contactData ko direct lo
+        console.log(`🎟️ New Lead From Contact:`, contactData);  // ✅ Correct console.log
+        io.emit('contact us', contactData); // ✅ Directly emit contactData
+    });
+});
+
+
+
+
+app.get('/', (req, res) => { res.status(200).json({ status: 200, message: "sucessfully run api" }) })
 app.use('/api', authRouting);
 app.use('/billing', billingRouting);
 app.use('/traning', traningRouting);
 app.use('/contact', contactRouting)
-app.listen(PORT, () => {
-    console.log(`server are runing on port http://localhost:${PORT}`)
-})
+
+server.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
 export default app;
