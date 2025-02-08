@@ -60,6 +60,10 @@ io.on('connection', (socket) => {
         console.log(`🎟️ New Lead From Contact:`, contactData);  // ✅ Correct console.log
         io.emit('contact us', contactData); // ✅ Directly emit contactData
     });
+    socket.on('new user signup', (contactData) => {  // ✅ contactData ko direct lo
+        console.log(`🎟️ New Lead From Contact:`, contactData);  // ✅ Correct console.log
+        io.emit('new user signup', contactData); // ✅ Directly emit contactData
+    });
 });
 
 
