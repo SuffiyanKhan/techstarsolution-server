@@ -8,6 +8,7 @@ import authRouting from './src/routing/auth.routing.js';
 import billingRouting from './src/routing/billing.routing.js';
 import traningRouting from './src/routing/traning.routing.js';
 import contactRouting from './src/routing/contact.routing.js';
+import routes from './src/routing/index.js';
 const app = express();
 const PORT = process.env.PORT || 9000;
 const server = http.createServer(app);
@@ -67,13 +68,10 @@ io.on('connection', (socket) => {
 });
 
 
-
+app.use('/',routes)
 
 app.get('/', (req, res) => { res.status(200).json({ status: 200, message: "sucessfully run api" }) })
-app.use('/api', authRouting);
-app.use('/billing', billingRouting);
-app.use('/traning', traningRouting);
-app.use('/contact', contactRouting)
+
 
 server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
