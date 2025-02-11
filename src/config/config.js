@@ -4,7 +4,8 @@ dotenv.config();
 
 
 const serverconfig={
-    db_url:process.env.SERVER_DATABASE_URL
+    db_url:process.env.SERVER_DATABASE_URL,
+    secret_key:process.env.JWT_SECRET
 }
 
 

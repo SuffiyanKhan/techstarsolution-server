@@ -19,3 +19,24 @@ export const getAllCoursesServices=async()=>{
         throw error;
     }
 }
+
+export const deleteCourseServices=async(_id)=>{
+    try {
+        const response = await Courses.findByIdAndDelete({_id});
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const updateCoursesServices=async(_id,payload)=>{
+    try {
+        const response = await Courses.findByIdAndUpdate(
+            _id,
+            {...payload}
+        )
+        return response;
+    } catch (error) {
+        throw error;   
+    }
+}

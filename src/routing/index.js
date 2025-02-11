@@ -5,6 +5,7 @@ import traningRouting from './traning.routing.js';
 import contactRouting from './contact.routing.js';
 import coursesRouting from './courses.routing.js';
 import recordedclassesvideosrouting from './recordedclassesvideos.routing.js';
+import accesspartnersRouting from './accesspartner.routing.js';
 
 const routes = express.Router();
 
@@ -14,5 +15,5 @@ routes.use('/traning', traningRouting);
 routes.use('/contact', contactRouting)
 routes.use('/course', coursesRouting)
 routes.use('/revideo', recordedclassesvideosrouting)
-
+routes.use('/accesstop',accesspartnersRouting)
 export default routes
