@@ -1,4 +1,4 @@
-import { addDataOfAccessPartnersServices, findByEmailAccessPartnersServices, getAllDataServices } from "../services/accesstoothers.services.js";
+import { addDataOfAccessPartnersServices, deleteaccesstopartnersServices, findByEmailAccessPartnersServices, getAllDataServices, updateaccesspartnersServices } from "../services/accesstoothers.services.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import serverconfig from "../config/config.js";
@@ -55,43 +55,38 @@ export const loginaccesspartnersControllers = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // ✅ Error handling: Check if email & password are provided
         if (!email || !password) {
-            return res.status(400).json({ 
-                status: 400, 
-                success: false, 
-                message: "Email aur Password zaroori hai!" 
+            return res.status(400).json({
+                status: 400,
+                success: false,
+                message: "Email aur Password zaroori hai!"
             });
         }
 
-        // ✅ Find user by email
         const existingUser = await findByEmailAccessPartnersServices(email);
         if (!existingUser) {
-            return res.status(404).json({ 
-                status: 404, 
-                success: false, 
-                message: "User nahi mila!" 
+            return res.status(404).json({
+                status: 404,
+                success: false,
+                message: "User nahi mila!"
             });
         }
 
-        // ✅ Password compare
         const comparePass = await bcrypt.compare(password, existingUser.password);
         if (!comparePass) {
-            return res.status(401).json({ 
-                status: 401, 
-                success: false, 
-                message: "Password incorrect hai!" 
+            return res.status(401).json({
+                status: 401,
+                success: false,
+                message: "Password incorrect hai!"
             });
         }
 
-        // ✅ Generate JWT Token
         const token = jwt.sign(
-            { id: existingUser._id, email: existingUser.email }, 
-            serverconfig.secret_key, 
-            { expiresIn: "7d" }  // Token 7 din tak valid hoga
+            { id: existingUser._id, email: existingUser.email },
+            serverconfig.secret_key,
+            { expiresIn: "7d" }
         );
 
-        // ✅ Send response
         return res.status(200).json({
             status: 200,
             success: true,
@@ -114,3 +109,33 @@ export const loginaccesspartnersControllers = async (req, res) => {
         });
     }
 };
+
+export const updateaccesspartnersControllers = async (req, res) => {
+    try {
+        const { id, editData } = req.body;
+        const response = await updateaccesspartnersServices(id, editData);
+        return res.status(200).json({ status: 200, sucess: true, message: 'update sucessfully', data: response })
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            success: false,
+            message: "Internal server error",
+            error: error.message
+        });
+    }
+}
+
+export const deleteaccesstopartnersControllers=async(req,res)=>{
+    try {
+        const{id}=req.params;
+        const response = await deleteaccesstopartnersServices(id);
+        return res.status(200).json({status:200,sucess:true,message:"sucess",data:response})
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            success: false,
+            message: "Internal server error",
+            error: error.message
+        });
+    }
+}

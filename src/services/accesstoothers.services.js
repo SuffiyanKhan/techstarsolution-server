@@ -29,3 +29,24 @@ export const findByEmailAccessPartnersServices=async(email)=>{
         throw error;
     }
 }
+
+export const updateaccesspartnersServices=async(id,payload)=>{
+    try {
+        const response = await AccessToOthers.findByIdAndUpdate(
+            id,
+            {...payload}
+        )
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const deleteaccesstopartnersServices=async(id)=>{
+    try {
+        const response = await AccessToOthers.findByIdAndDelete(id)
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
