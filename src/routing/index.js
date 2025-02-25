@@ -6,14 +6,16 @@ import contactRouting from './contact.routing.js';
 import coursesRouting from './courses.routing.js';
 import recordedclassesvideosrouting from './recordedclassesvideos.routing.js';
 import accesspartnersRouting from './accesspartner.routing.js';
+import trackingVisitorsRoutes from './trackingvisitors.routes.js';
 
 const routes = express.Router();
 
 routes.use('/api', authRouting);
 routes.use('/billing', billingRouting);
 routes.use('/traning', traningRouting);
-routes.use('/contact', contactRouting)
-routes.use('/course', coursesRouting)
-routes.use('/revideo', recordedclassesvideosrouting)
-routes.use('/accesstop',accesspartnersRouting)
+routes.use('/contact', contactRouting);
+routes.use('/course', coursesRouting);
+routes.use('/revideo', recordedclassesvideosrouting);
+routes.use('/accesstop',accesspartnersRouting);
+routes.use('/tracking',trackingVisitorsRoutes)
 export default routes

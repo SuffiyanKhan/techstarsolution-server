@@ -6,6 +6,7 @@ import contactModel from "./contact.model.js";
 import coursesModel from "./courses.model.js";
 import recordedclassesmodel from "./recorderclassesvideos.model.js";
 import accesstopartnersModel from "./accesstopartners.models.js";
+import visitorModule from "./visitor.module.js";
 
 const db = {};
 db.mongoose = mongoose;
@@ -15,6 +16,7 @@ db.training = Training;
 db.contact = contactModel;
 db.courses = coursesModel;
 db.recordedclassesvideos = recordedclassesmodel;
-db.accesstopartners = accesstopartnersModel
+db.accesstopartners = accesstopartnersModel;
+db.Visitor=visitorModule
 
 export default db;
