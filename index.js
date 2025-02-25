@@ -4,17 +4,13 @@ import mongoose from 'mongoose';
 import http from 'http';
 import { Server } from 'socket.io';
 import { DB_RETRY_LIMIT, DB_RETRY_TIMEOUT } from './src/constant/constant.js';
-import authRouting from './src/routing/auth.routing.js';
-import billingRouting from './src/routing/billing.routing.js';
-import traningRouting from './src/routing/traning.routing.js';
-import contactRouting from './src/routing/contact.routing.js';
 import routes from './src/routing/index.js';
 const app = express();
 const PORT = process.env.PORT || 9000;
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: ['http://localhost:5173', 'http://localhost:5174'], // React app ka URL
+        origin: ['http://localhost:5173', 'http://localhost:5174','https://techstarsolution.net'],  
         methods: ['GET', 'POST', 'DELETE'],
         allowedHeaders: ['Content-Type'],
     }
