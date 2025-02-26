@@ -92,6 +92,7 @@ export const loginaccesspartnersControllers = async (req, res) => {
             success: true,
             message: "Login successful!",
             token,
+            role:existingUser.role,
             user: {
                 id: existingUser._id,
                 name: existingUser.name,
