@@ -5,7 +5,7 @@ import serverconfig from "../config/config.js";
 
 export const addDataOfAccessPartnersControllers = async (req, res) => {
     try {
-        const { name, email, password, phone } = req.body;
+        const { name, email, password, phone, role } = req.body;
 
         if (!password) {
             return res.status(400).json({ status: 400, success: false, message: 'Password is required' });
@@ -16,7 +16,8 @@ export const addDataOfAccessPartnersControllers = async (req, res) => {
             name,
             email,
             password: hashpass,
-            phone
+            phone,
+            role
         };
 
         const response = await addDataOfAccessPartnersServices(obj);
@@ -31,7 +32,6 @@ export const getAllDataOfContolers = async (req, res) => {
     try {
         // Data get karo
         const response = await getAllDataServices();
-
         return res.status(200).json({
             status: 200,
             success: true,
@@ -82,7 +82,7 @@ export const loginaccesspartnersControllers = async (req, res) => {
         }
 
         const token = jwt.sign(
-            { id: existingUser._id, email: existingUser.email },
+            { id: existingUser._id, email: existingUser.email,role:existingUser.role },
             serverconfig.secret_key,
             { expiresIn: "7d" }
         );
@@ -125,11 +125,11 @@ export const updateaccesspartnersControllers = async (req, res) => {
     }
 }
 
-export const deleteaccesstopartnersControllers=async(req,res)=>{
+export const deleteaccesstopartnersControllers = async (req, res) => {
     try {
-        const{id}=req.params;
+        const { id } = req.params;
         const response = await deleteaccesstopartnersServices(id);
-        return res.status(200).json({status:200,sucess:true,message:"sucess",data:response})
+        return res.status(200).json({ status: 200, sucess: true, message: "sucess", data: response })
     } catch (error) {
         return res.status(500).json({
             status: 500,

@@ -19,6 +19,10 @@ const accesstoartnersSchema=new Schema({
         type:String,
         require:true
     },
+        role:{
+            type:String,
+            require:true
+        }
 },{timestamps:true});
 
 const accesstopartnersModel=mongoose.model('accesstopartners',accesstoartnersSchema);
