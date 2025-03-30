@@ -7,6 +7,8 @@ import coursesRouting from './courses.routing.js';
 import recordedclassesvideosrouting from './recordedclassesvideos.routing.js';
 import accesspartnersRouting from './accesspartner.routing.js';
 import trackingVisitorsRoutes from './trackingvisitors.routes.js';
+import projectCategoryRoute from './projectCategory.routing.js';
+import portfolioRoting from './portfolio.routing.js';
 
 const routes = express.Router();
 
@@ -18,4 +20,6 @@ routes.use('/course', coursesRouting);
 routes.use('/revideo', recordedclassesvideosrouting);
 routes.use('/accesstop',accesspartnersRouting);
 routes.use('/tracking',trackingVisitorsRoutes)
+routes.use('/portfolio',portfolioRoting)
+routes.use('/projectCategory',projectCategoryRoute)
 export default routes
