@@ -20,3 +20,13 @@ export const getProjectCategoryServices=async()=>{
         throw error;
     }
 }
+
+export const deleteProjectCategoryServices=async(_id)=>{
+    try {
+        const resposne = await ProjectCategory.findByIdAndDelete(_id);
+        return resposne
+    } catch (error) {
+        throw error;
+    }
+}
+
