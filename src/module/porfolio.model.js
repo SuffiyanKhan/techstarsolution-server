@@ -22,6 +22,10 @@ const porfolioSchema=new Schema({
     liveLink:{
         type:String,
         require:true
+    },
+    parentCategoryId:{
+        type:String,
+        require:true
     }
 },{timestamps:true});
 

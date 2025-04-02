@@ -20,3 +20,12 @@ export const getAllPortfoliosSerices=async()=>{
         throw error;
     }
 }
+
+export const deletePortfoliosSerices=async(_id)=>{
+    try {
+        const response = await Portfolio.findByIdAndDelete({_id});
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
