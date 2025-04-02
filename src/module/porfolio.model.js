@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const {Schema}=mongoose;
 
 const porfolioSchema=new Schema({
-    name:{
+    category:{
         type:String,
         require:true
     },
