@@ -7,9 +7,17 @@ const projectCategorySchema=new Schema({
         type:String,
         require:true
     },
-    thumbnail:{
+    titel:{
         type:String,
         require:true
+    },
+    description:{
+        type:String,
+        require:true
+    },
+    thumbnail:{
+        type:String,
+        default:true
     }
 },{timestamps:true});
 
