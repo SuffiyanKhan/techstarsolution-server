@@ -1,18 +1,18 @@
 import db from '../module/index.js';
 
-const {projectCategory:ProjectCategory}=db;
+const { projectCategory: ProjectCategory } = db;
 
 
-export const addProjectCategoryServices=async(paylaod)=>{
+export const addProjectCategoryServices = async (paylaod) => {
     try {
-        const response = await ProjectCategory({...paylaod});
+        const response = await ProjectCategory({ ...paylaod });
         return response.save();
     } catch (error) {
         throw error;
     }
 }
 
-export const getProjectCategoryServices=async()=>{
+export const getProjectCategoryServices = async () => {
     try {
         const resposne = await ProjectCategory.find({}).exec();
         return resposne;
@@ -21,7 +21,21 @@ export const getProjectCategoryServices=async()=>{
     }
 }
 
-export const deleteProjectCategoryServices=async(_id)=>{
+export const updateProjectCategoryServices = async (_id, payload) => {
+    try {
+        const response = await ProjectCategory.findByIdAndUpdate(
+            _id,
+            payload,
+            { new: true }
+        );
+        return response;
+    } catch (error) {
+        console.error("Error updating project category:", error.message);
+        throw error;
+    }
+}
+
+export const deleteProjectCategoryServices = async (_id) => {
     try {
         const resposne = await ProjectCategory.findByIdAndDelete(_id);
         return resposne
@@ -29,4 +43,6 @@ export const deleteProjectCategoryServices=async(_id)=>{
         throw error;
     }
 }
+
+
 
