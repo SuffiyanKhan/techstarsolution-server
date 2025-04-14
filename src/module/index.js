@@ -9,6 +9,7 @@ import accesstopartnersModel from "./accesstopartners.models.js";
 import visitorModule from "./visitor.module.js";
 import projectCategoryModule from "./projectCategory.module.js";
 import portfolioModel from "./porfolio.model.js";
+import ourprojectsModel from "./ourprojects.models.js";
 
 const db = {};
 db.mongoose = mongoose;
@@ -21,6 +22,7 @@ db.recordedclassesvideos = recordedclassesmodel;
 db.accesstopartners = accesstopartnersModel;
 db.Visitor=visitorModule;
 db.projectCategory=projectCategoryModule;
-db.portfolio=portfolioModel
+db.portfolio=portfolioModel;
+db.ourprojects=ourprojectsModel;
 
 export default db;
