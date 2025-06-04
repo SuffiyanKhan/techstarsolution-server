@@ -10,6 +10,7 @@ import trackingVisitorsRoutes from './trackingvisitors.routes.js';
 import projectCategoryRoute from './projectCategory.routing.js';
 import portfolioRoting from './portfolio.routing.js';
 import newprojectsRouting from './newprojects.routing.js';
+import stripeRouting from './stripe.routing.js';
 
 const routes = express.Router();
 
@@ -24,5 +25,6 @@ routes.use('/tracking',trackingVisitorsRoutes);
 routes.use('/portfolio',portfolioRoting);
 routes.use('/projectCategory',projectCategoryRoute);
 routes.use('/newprojects',newprojectsRouting);
+routes.use('/stripe',stripeRouting);
 
 export default routes

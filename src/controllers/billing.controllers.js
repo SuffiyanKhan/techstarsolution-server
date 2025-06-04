@@ -2,8 +2,11 @@ import { getAllBillingDataServices, saveBillingDataSevices } from "../services/b
 
 const saveBillingData = async (req, res) => {
     try {
-        const { name, email, phone, address, country, city, zipcode, serviceName, price } = req.body;
-        const obj = { name, email, phone, address, country, city, zipcode, serviceName, price };
+        const {formData} = req.body;
+        console.log("Form Data:", formData);
+        const { name, email, phone, address, country, city, zipCode, serviceName, price } = formData;
+        const obj = { name, email, phone, address, country, city, zipCode, serviceName, price };
+        console.log("Billing Data:", obj);
         const response = await saveBillingDataSevices(obj)
         return res.status(200).json({ status: 200, success: true, message: "successfull", data: response, id: response._id })
     } catch (error) {

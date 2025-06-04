@@ -9,8 +9,13 @@ const app = express();
 const PORT = process.env.PORT || 9000;
 const server = http.createServer(app);
 const io = new Server(server, {
+    // cors: {
+    //     origin: ['http://localhost:5173', 'http://localhost:5174','https://techstarsolution.net','https://portal.techstarsolution.net'],  
+    //     methods: ['GET', 'POST', 'DELETE'],
+    //     allowedHeaders: ['Content-Type'],
+    // }
     cors: {
-        origin: ['http://localhost:5173', 'http://localhost:5174','https://techstarsolution.net','https://portal.techstarsolution.net'],  
+        origin: ['*'],  
         methods: ['GET', 'POST', 'DELETE'],
         allowedHeaders: ['Content-Type'],
     }

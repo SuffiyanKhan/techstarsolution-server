@@ -6,47 +6,54 @@ const billingSchema = Schema({
     name: {
         type: String,
         required: true,
-        set: (v) => v.trim().toLowerCase()
+        lowercase: true,
     },
     email: {
         type: String,
         required: true,
-        set: (v) => v.trim().toLowerCase()
+        lowercase: true,
     },
     phone: {
         type: String,
         required: true,
-        set: (v) => v.trim().toLowerCase()
+        lowercase: true,
+
     },
     address: {
         type: String,
         required: true,
-        set: (v) => v.trim().toLowerCase()
+        lowercase: true,
+
     },
     country: {
         type: String,
         required: true,
-        set: (v) => v.trim().toLowerCase()
+        lowercase: true,
+
     },
     city: {
         type: String,
         required: true,
-        set: (v) => v.trim().toLowerCase()
+        lowercase: true,
+
     },
-    zipcode: {
+    zipCode: {
         type: String,
         required: true,
-        set: (v) => v.trim().toLowerCase()
+        lowercase: true,
+
     },
     serviceName: {
         type: String,
         required: true,
-        set: (v) => v.trim().toLowerCase()
+        lowercase: true,
+
     },
     price: {
         type: String,
         required: true,
-        set: (v) => v.trim().toLowerCase()
+        lowercase: true,
+
     },
     payment: {
         type: Boolean,
