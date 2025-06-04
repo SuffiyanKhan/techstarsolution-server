@@ -1,25 +1,35 @@
 import db from '../module/index.js';
 
-const {billing:Billing}=db;
-const saveBillingDataSevices=async(payload)=>{
+const { billing: Billing } = db;
+const saveBillingDataSevices = async (payload) => {
     try {
-        const reponse = await Billing({...payload});
+        const reponse = await Billing({ ...payload });
         return reponse.save();
     } catch (error) {
         throw error;
     }
 }
 
-const getAllBillingDataServices=async()=>{
+const getAllBillingDataServices = async () => {
     try {
-        const response =await Billing.find({});
+        const response = await Billing.find({});
         return response
     } catch (error) {
         throw error;
     }
 }
 
-export{
+const updateBillingDataServices = async (_id) => {
+    try {
+        const response = await Billing.findByIdAndUpdate(_id, { $set: { payment: true } }, { new: true });
+        return response
+    } catch (error) {
+        throw error;
+    }
+}
+
+export {
     saveBillingDataSevices,
-    getAllBillingDataServices
+    getAllBillingDataServices,
+    updateBillingDataServices
 }
